@@ -14,17 +14,17 @@
  * the License.
  */
 
-function toMap(names, values) {
+export function toMap(names, values) {
 	return names.reduce((map, name, i) => {
 		map[name] = values[i];
 		return map;
 	}, {});
 }
 
-function dedupe(item, index, arr) {
+export function dedupe(item, index, arr) {
 	return arr.indexOf(item) === index;
 }
-function toFileMap(files){
+export function toFileMap(files){
 	return files.reduce((result, file) => {
 		if (file.size){ // excluding files with size 0
 			result[file.filename] = file.size;
@@ -32,4 +32,3 @@ function toFileMap(files){
 		return result;
 	}, {});
 }
-module.exports ={ toMap,dedupe,toFileMap };

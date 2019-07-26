@@ -14,17 +14,17 @@
  * the License.
  */
 
-const path = require('path');
-const promisify = require('util.promisify');
-const globPromise = require('glob');
-const minimatch = require('minimatch');
-const gzipSize = require('gzip-size');
-const chalk = require('chalk');
-const prettyBytes = require('pretty-bytes');
-const escapeRegExp = require('escape-string-regexp');
-const { toMap, dedupe, toFileMap } = require('./util');
-const { publishSizes, publishDiff } = require('./publish-size');
-const fs = require('fs-extra');
+import path from 'path';
+import promisify from 'util.promisify';
+import globPromise from 'glob';
+import minimatch from 'minimatch';
+import gzipSize from 'gzip-size';
+import chalk from 'chalk';
+import prettyBytes from 'pretty-bytes';
+import escapeRegExp from 'escape-string-regexp';
+import { toMap, dedupe, toFileMap } from './util';
+import { publishSizes, publishDiff } from './publish-size';
+import fs from 'fs-extra';
 
 const glob = promisify(globPromise);
 const NAME = 'SizePlugin';
@@ -103,7 +103,7 @@ module.exports = class SizePlugin {
 					out += `([0-9a-zA-Z]{${len}})`;
 					replace[count++] = true;
 				}
- else if (type) {
+				else if (type) {
 					out += '(.*?)';
 					replace[count++] = false;
 				}
@@ -128,7 +128,7 @@ module.exports = class SizePlugin {
 			const oldStats = await fs.readJSON(filename);
 			return oldStats.sort((a, b) => b.timestamp - a.timestamp);
 		}
- catch (err) {
+		catch (err) {
 			return [];
 		}
 	}
@@ -196,7 +196,7 @@ module.exports = class SizePlugin {
 		if (compiler.hooks && compiler.hooks.emit) {
 			compiler.hooks.emit.tapAsync(NAME, afterEmit);
 		}
- else {
+		else {
 			// for webpack version < 3
 			compiler.plugin('after-emit', afterEmit);
 		}
@@ -253,7 +253,7 @@ module.exports = class SizePlugin {
 					sizeText = chalk.bold(sizeText);
 					deltaText = chalk.red(deltaText);
 				}
- else if (delta < -10) {
+				else if (delta < -10) {
 					deltaText = chalk.green(deltaText);
 				}
 				sizeText += ` (${deltaText})`;
