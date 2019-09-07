@@ -14,8 +14,8 @@
  * the License.
  */
 
-import escapeRegExp from 'escape-string-regexp';
-import SizePluginCore from 'size-plugin-core';
+const escapeRegExp = require('escape-string-regexp');
+const SizePluginCore = require('size-plugin-core');
 
 const NAME = 'SizePlugin';
 
@@ -33,7 +33,7 @@ const NAME = 'SizePlugin';
  * @param {(data:Data)=>string?} [options.decorateAfter] custom function to decorate all output
  * @public
  */
-export default class SizePlugin {
+class SizePlugin {
 	constructor(options) {
 		const pluginOptions=options||{};
 		const coreOptions={ ...pluginOptions,stripHash: pluginOptions.stripHash||this.stripHash.bind(this) };
@@ -153,3 +153,5 @@ export default class SizePlugin {
  * @property {string} output Current buffered output
  * @public
  */
+
+module.exports=SizePlugin;
